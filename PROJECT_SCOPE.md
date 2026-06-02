@@ -1,83 +1,181 @@
-**Version 1 Goal**
+# Game Prototype Scope – Version 1
 
-A tiny playable prototype where:
-- player walks in first person
-- mines blocks
-- collects gold
-- dies when uncovering monster
-- score is displayed
+## Vision
 
-NO multiplayer
-NO crafting
-NO enemy AI
-NO quests
-NO advanced graphics
-NO procedural caves
-NO inventory system
+A small first-person mining horror prototype where the player:
 
-**Technical Goals**
+* explores a small underground area
+* mines blocks
+* collects gold for score
+* can accidentally trigger a monster event
+* survives as long as possible
 
-1. Scene Navigation
-- [ ] move in editor
-- [ ] create objects
-- [ ] organize hierarchy
+The focus is tension, simplicity, and a complete playable loop.
 
-2. First Person Controller
+---
+
+## Constraints
+
+This project will NOT include:
+
+* multiplayer
+* crafting systems
+* enemy AI or moving monsters
+* quests or narrative systems
+* inventory systems
+* complex graphics or realism
+* large-scale world simulation
+
+The goal is a complete vertical slice, not a full game.
+
+---
+
+## Learning Goals
+
 Learn:
-- [ ] WASD movement
-- [ ] mouse look
 
-3. Raycasting
-Critical for mining - pickaxe mechanic
-what am I looking at?:
-- [ ] center-screen ray
-- [ ] detect wall
-- [ ] click to mine
-That unlocks:
-- mining
-- interaction
-- detection
+* Prefabs
+* Raycasting
+* Game state management
+* UI systems
+* Audio systems
+* Basic Unity architecture
 
-4. Prefabs
-- [ ] blocks
+---
 
-5. Basic UI
-- [ ] score text
-- [ ] game over text
+## Milestone 1 – Player Movement
 
-Build Vertical Slice Prototype
-- [ ] one tiny playable loop
-    NOT:
-    - many disconnected systems
+### Implementation Checklist
 
-First prototype:
-One small room
+* [x] Scene created
+* [x] First Person Controller imported
+* [x] WASD movement works
+* [x] Mouse look works
 
-Inside:
-- walls
-- hidden gold
-- hidden monster
+### Definition of Done
 
-Player:
-- mines walls
-- gains score
-- dies if monster uncovered
+Movement is considered complete when:
 
-**Milestone 1**
-- [ ] Player can walk
+* Player can move without errors
+* Camera rotation is smooth
+* Movement speed is consistent
+* Controls feel responsive during testing
 
-**Milestone 2**
-- [ ] Player can destroy a wall
+---
 
-**Milestone 3**
-- [ ] Destroyed wall reveals:
-    - [ ] gold
-    OR
-    - [ ] monster
+## Milestone 2 – Mining System
 
-**Milestone 4**
-- [ ] Game over screen works
+### Implementation Checklist
 
-**Milestone 5**
-- [ ] Audio tension system
+* [ ] Center-screen raycast exists
+* [ ] Left click sends raycast
+* [ ] Raycast detects Block
+* [ ] Hit block can be mined
+* [ ] Mined block disappears
 
+### Definition of Done
+
+Mining is considered complete when:
+
+* Player can reliably mine blocks
+* Incorrect objects are not mined
+* Mining interaction feels predictable
+* No obvious interaction bugs occur during testing
+
+---
+
+## Milestone 3 – Block Types
+
+### Implementation Checklist
+
+* [ ] Block prefab created
+* [ ] BlockType enum created
+* [ ] Stone block implemented
+* [ ] Gold block implemented
+* [ ] Monster block implemented
+* [ ] Gold increases score
+* [ ] Monster triggers death event
+
+### Definition of Done
+
+Block system is considered complete when:
+
+* All block types behave correctly
+* New block types can be added without modifying the mining system
+* Block behavior is determined by BlockType
+
+---
+
+## Milestone 4 – Death State
+
+### Implementation Checklist
+
+* [ ] Death state exists
+* [ ] Player input is disabled on death
+* [ ] Death event triggers correctly
+
+### Definition of Done
+
+Death system is considered complete when:
+
+* Player can no longer interact after death
+* Death consistently transitions to Game Over
+* No gameplay systems continue running unexpectedly
+
+---
+
+## Milestone 5 – UI System
+
+### Implementation Checklist
+
+* [ ] Score text displayed
+* [ ] Score updates when gold is collected
+* [ ] Game Over screen appears
+* [ ] Restart button works
+
+### Definition of Done
+
+UI is considered complete when:
+
+* Information is clearly visible
+* UI updates correctly during gameplay
+* Restart flow works reliably
+
+---
+
+## Milestone 6 – Audio Tension System
+
+### Implementation Checklist
+
+* [ ] AudioManager exists
+* [ ] Ambient audio plays
+* [ ] Monster event plays jumpscare sound
+* [ ] Audio changes based on game state
+
+### Definition of Done
+
+Audio system is considered complete when:
+
+* Audio responds correctly to gameplay events
+* Volume levels are reasonable
+* Sounds trigger consistently
+* Audio improves player awareness and atmosphere
+
+---
+
+## Core Systems
+
+* PlayerController
+* MiningSystem
+* Block
+* GameManager
+* UIManager
+* AudioManager
+
+---
+
+## Development Principle
+
+Implementation tasks use checkboxes.
+
+Subjective quality, feel, balance, atmosphere, and polish are evaluated through Definition of Done sections and playtesting rather than checklists.
