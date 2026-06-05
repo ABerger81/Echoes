@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+
 
 // This script is responsible for controlling the UI elements that appear when the player can interact with objects in the game world. It updates the action text and command text based on the player's current context and manages the visibility of the UI elements.
 public class UIController : MonoBehaviour
