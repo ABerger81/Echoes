@@ -1,16 +1,19 @@
+using System.Collections;
 using UnityEngine;
 
 
 // This script is attached to the candle object in the game. It allows the player to interact with the candle by pressing the "E" key when they are close enough to it. When the player interacts with the candle, it disables the box collider on the candle, making it non-interactable, and hides both the table candle and hand candle game objects. This can be used to simulate the player picking up the candle and adding it to their inventory or using it by holding it in their hand.
 
 
-public class CandlePickUp : MonoBehaviour
+public class WebBurn : MonoBehaviour
 {
     [SerializeField] bool canPick;
     [SerializeField] GameObject textOnScreen;
-    [SerializeField] GameObject tableCandle;
-    [SerializeField] GameObject handCandle;
-    [SerializeField] GameObject webEvent;
+    [SerializeField] GameObject thePlayer;
+    [SerializeField] GameObject webCam;
+    [SerializeField] GameObject fadeIn;
+    [SerializeField] GameObject flameObject;
+    [SerializeField] GameObject webObjects;
 
     void Update()
     {
@@ -19,9 +22,7 @@ public class CandlePickUp : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E))
             {
                 this.GetComponent<BoxCollider>().enabled = false;
-                tableCandle.SetActive(false);
-                handCandle.SetActive(true);
-                webEvent.SetActive(true);
+                StartCoroutine(BurnWeb());
             }
         }
     }
@@ -31,8 +32,8 @@ public class CandlePickUp : MonoBehaviour
         if (PlayerCasting.distanceFromTarget < 7)
         {
             canPick = true;
-            UIController.actionText = "Candle";
-            UIController.commandText = "Pick Up";
+            UIController.actionText = "Spider Web";
+            UIController.commandText = "Burn";
             UIController.uiActive = true;
         }
         else
@@ -50,5 +51,19 @@ public class CandlePickUp : MonoBehaviour
         UIController.actionText = "";
         UIController.commandText = "";
         UIController.uiActive = false;
+    }
+
+    IEnumerator BurnWeb()
+    {
+        webCam.SetActive(true);
+        thePlayer.SetActive(false);
+        flameObject.SetActive(true);
+        yield return new WaitForSeconds(3);
+        fadeIn.SetActive(false);
+        fadeIn.SetActive(true);
+        webObjects.SetActive(false);
+        flameObject.SetActive(false);
+        thePlayer.SetActive(true);
+        webCam.SetActive(false);
     }
 }
