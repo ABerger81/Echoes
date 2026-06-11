@@ -29,7 +29,7 @@ public class WebBurn : MonoBehaviour
 
     void OnMouseOver()
     {
-        if (PlayerCasting.distanceFromTarget < 7)
+        if (PlayerCasting.distanceFromTarget < 5)
         {
             canPick = true;
             UIController.actionText = "Spider Web";
