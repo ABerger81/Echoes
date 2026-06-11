@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 
 
-// This script is attached to the candle object in the game. It allows the player to interact with the candle by pressing the "E" key when they are close enough to it. When the player interacts with the candle, it disables the box collider on the candle, making it non-interactable, and hides both the table candle and hand candle game objects. This can be used to simulate the player picking up the candle and adding it to their inventory or using it by holding it in their hand.
+// This script is attached to the spider web object in the game. It allows the player to interact with the spider web if they have the candle in their hand and are close enough to it. When the player interacts with the spider web, by pressing the "E" key, it disables the box collider on the web, and starts a coroutine that simulates the player burning the web with the candle. The coroutine activates a web camera, hides the player, shows a flame object, and after a few seconds, it fades in a new scene, hides the web objects and flame, and shows the player again. This can be used to simulate the player burning through the web and progressing to a new area in the game.
 
 
 public class WebBurn : MonoBehaviour
