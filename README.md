@@ -1,9 +1,47 @@
-Learning how to finish small systems.
-Build -> Reflect -> Extract -> Reuse
+# Mythological Horror
 
-Using Unity 6.4 Engine
+A first-person horror exploration game where the player enters ancient mythological locations in search of treasure.
 
-Working Pitch
-  "A horror mining game where every block mined could reveal treasure...
-  or a hidden creature."
-  Working on tension by audio before graphics
+The player cannot fight.
+
+Instead, survival depends on observation, knowledge, and knowing when to escape.
+
+---
+
+## Core Gameplay Loop
+
+Explore
+→ Learn
+→ Discover
+→ Find Treasure
+→ Escape
+
+---
+
+## Development Goals
+
+This project is also a learning project focused on:
+
+* Unity Development
+* Game Architecture
+* System Design
+* Production Planning
+* Finishing Small Systems
+
+---
+
+## Current Version
+
+v0.1.0
+
+Status: Prototype
+
+---
+
+## Roadmap
+
+See:
+
+* docs/roadmap.md
+* docs/scope.md
+* docs/vision.md
