@@ -1,8 +1,10 @@
-# Game Prototype Scope – Version 1
+# Game Prototype Scope – Version 2
 
 ## MVP
 
 Current Development Scope
+
+Goal: Validate the core gameplay loop (matches Roadmap MVP).
 
 Features:
 
@@ -10,39 +12,54 @@ Features:
 * Interaction
 * Treasure Collection
 * Score
-* Death
+* Basic Escape
+* Death / Capture State
 * Basic UI
 
 Not Included:
 
+* Heartbeat / Tension System
+* Adaptive Audio
+* Mythology Clues
 * Multiple Regions
-* Complex AI
+* Complex Monster AI
 * Story Campaign
 * Procedural Generation
 * Multiplayer
+
+Note: Heartbeat, Clues, and full Audio Tension are intentionally excluded from MVP. Per roadmap.md, they belong to the Expansion phase. The MVP's only job is to prove explore → collect → escape → win/lose is fun with placeholder feedback (basic SFX, simple UI text) before tension systems are layered in.
 
 ---
 
 ## Expansion
 
-Future Features
+Goal: Validate tension and atmosphere on top of a working MVP loop.
+
+Features:
 
 * Heartbeat System
-* Environmental Tension
+* Adaptive / Audio Tension System
 * Safe Zones
 * Mythology Clues
+* Lighting Effects
+* Basic Horror Events (jumpscares)
+
+Success Criteria:
+
+* Player experiences tension
+* Player understands danger escalation
 
 ---
 
 ## Vertical Slice
 
-One complete mythology level.
+One complete mythology level. MVP + Expansion features combined = portfolio piece, suitable for public playtesting.
 
 ---
 
 ## Future Vision
 
-Full game with multiple mythological regions.
+Full game with multiple mythological regions = Steam-shippable scope. See vision.md.
 
 ---
 
@@ -55,6 +72,7 @@ Any new feature must be classified before implementation:
 * Vertical Slice
 * Future Vision
 
+If a feature can't be classified yet, it goes in the relevant doc's Open Questions section — not into a milestone checklist.
 
 ---
 
@@ -66,23 +84,25 @@ Learn:
 * Raycasting
 * Game state management
 * UI systems
-* Audio systems
+* Audio systems (basic, then adaptive)
+* Event-driven architecture (C# events / ScriptableObject event channels)
 * Basic Unity architecture
+* Git hygiene for Unity projects
 
 ---
 
-## Milestone 1 – Player Movement
+## MVP Milestones
 
-### Implementation Checklist
+### Milestone 1 – Player Movement (Complete)
+
+Checklist:
 
 * [x] Scene created
-* [x] First Person Controller imported
+* [x] First Person Controller imported (Unity Starter Assets)
 * [x] WASD movement works
 * [x] Mouse look works
 
-### Definition of Done
-
-Movement is considered complete when:
+Definition of Done:
 
 * Player can move without errors
 * Camera rotation is smooth
@@ -91,79 +111,87 @@ Movement is considered complete when:
 
 ---
 
-## Milestone 2 – Mining System
+### Milestone 2 – Interaction System
 
-### Implementation Checklist
+Checklist:
 
 * [ ] Center-screen raycast exists
-* [ ] Left click sends raycast
-* [ ] Raycast detects Block
-* [ ] Hit block can be mined
-* [ ] Mined block disappears
+* [ ] Interact key sends raycast
+* [ ] Raycast detects Interactable objects
+* [ ] Interaction triggers a response (pickup / inspect)
+* [ ] Interacted object disappears or changes state
 
-### Definition of Done
+Definition of Done:
 
-Mining is considered complete when:
-
-* Player can reliably mine blocks
-* Incorrect objects are not mined
-* Mining interaction feels predictable
+* Player can reliably interact with intended objects
+* Non-interactable objects are ignored
+* Interaction feels predictable
 * No obvious interaction bugs occur during testing
 
 ---
 
-## Milestone 3 – Block Types
+### Milestone 3 – Treasure & Score System
 
-### Implementation Checklist
+Checklist:
 
-* [ ] Block prefab created
-* [ ] BlockType enum created
-* [ ] Stone block implemented
-* [ ] Gold block implemented
-* [ ] Monster block implemented
-* [ ] Gold increases score
-* [ ] Monster triggers death event
+* [ ] Treasure prefab created
+* [ ] TreasureType enum created (Minor, Major)
+* [ ] Minor Treasure implemented (increases score)
+* [ ] Major Treasure implemented (triggers Escape Phase)
+* [ ] GameManager tracks and exposes current score
 
-### Definition of Done
+Definition of Done:
 
-Block system is considered complete when:
-
-* All block types behave correctly
-* New block types can be added without modifying the mining system
-* Block behavior is determined by BlockType
+* All treasure types behave correctly on pickup
+* New treasure types can be added without modifying the interaction system
+* Treasure behavior is determined by TreasureType, not hardcoded per object
 
 ---
 
-## Milestone 4 – Death State
+### Milestone 4 – Basic Escape
 
-### Implementation Checklist
+Checklist:
 
-* [ ] Death state exists
-* [ ] Player input is disabled on death
-* [ ] Death event triggers correctly
+* [ ] Major Treasure pickup raises an "Escape Triggered" event
+* [ ] Exit point exists and is detectable
+* [ ] Reaching the exit after escape is triggered ends the level successfully
+* [ ] (Optional for MVP) A simple non-AI threat exists — e.g. a timer, or a placeholder chaser with no real pathfinding
 
-### Definition of Done
+Definition of Done:
 
-Death system is considered complete when:
+* The explore → trigger → escape → win loop is completable start to finish
+* Player understands they must reach the exit once escape is triggered
+* No horror/AI polish required yet — this milestone only proves the loop works
 
-* Player can no longer interact after death
-* Death consistently transitions to Game Over
+---
+
+### Milestone 5 – Death / Capture State
+
+Checklist:
+
+* [ ] Death/Capture state exists
+* [ ] Player input is disabled on capture
+* [ ] Capture event triggers correctly
+* [ ] Game Over state is reached reliably
+
+Definition of Done:
+
+* Player can no longer interact after capture
+* Capture consistently transitions to Game Over
 * No gameplay systems continue running unexpectedly
 
 ---
 
-## Milestone 5 – UI System
+### Milestone 6 – UI System
 
-### Implementation Checklist
+Checklist:
 
 * [ ] Score text displayed
-* [ ] Score updates when gold is collected
+* [ ] Score updates when treasure is collected
 * [ ] Game Over screen appears
 * [ ] Restart button works
 
-### Definition of Done
-
-UI is considered complete when:
+Definition of Done:
 
 * Information is clearly visible
 * UI updates correctly during gameplay
@@ -171,34 +199,78 @@ UI is considered complete when:
 
 ---
 
-## Milestone 6 – Audio Tension System
+## Expansion Milestones (Do Not Start Before MVP Milestones 1–6 Are Done)
 
-### Implementation Checklist
+### Milestone 7 – Heartbeat & Tension System
+
+Checklist:
+
+* [ ] Heartbeat state machine exists (Calm, Alert, Fear, Panic)
+* [ ] State transitions are triggered by gameplay events (proximity, jumpscares, escape trigger)
+* [ ] Each state has at least a placeholder audio/visual response
+
+Definition of Done: see systems/heartbeat_system.md
+
+---
+
+### Milestone 8 – Audio Tension System
+
+Checklist:
 
 * [ ] AudioManager exists
-* [ ] Ambient audio plays
-* [ ] Monster event plays jumpscare sound
-* [ ] Audio changes based on game state
+* [ ] Mixer Snapshots exist for each Heartbeat state
+* [ ] Ambient ground layer plays and loops correctly
+* [ ] Jumpscare audio events trigger correctly
 
-### Definition of Done
+Definition of Done: see docs/audio_design.md
 
-Audio system is considered complete when:
+---
 
-* Audio responds correctly to gameplay events
-* Volume levels are reasonable
-* Sounds trigger consistently
-* Audio improves player awareness and atmosphere
+### Milestone 9 – Safe Zones
+
+Checklist:
+
+* [ ] Safe Zone trigger volume exists
+* [ ] Heartbeat decreases while inside a Safe Zone
+* [ ] Safe Zone has a time limit during Escape Phase
+
+Definition of Done:
+
+* Player understands a Safe Zone is "safer," not "safe forever"
+* Time pressure is felt without feeling unfair
+
+---
+
+### Milestone 10 – Mythology Clue System
+
+Checklist:
+
+* [ ] Clue objects exist and are discoverable
+* [ ] Clues are recorded somewhere the player can recall (journal/UI)
+* [ ] At least one clue meaningfully changes player behavior during Escape Phase
+
+Definition of Done: see systems/clue_system.md
 
 ---
 
 ## Core Systems
 
+MVP:
+
 * PlayerController
-* MiningSystem
-* Block
+* InteractionSystem
+* TreasureSystem
+* EscapeSystem (basic)
 * GameManager
 * UIManager
-* AudioManager
+* AudioManager (basic)
+
+Expansion adds:
+
+* HeartbeatSystem
+* ClueSystem
+* EscapeSystem (full — chase AI, safe zone timers)
+* AudioManager (adaptive — mixer snapshots, layered ambience)
 
 ---
 

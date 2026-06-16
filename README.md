@@ -1,4 +1,4 @@
-# Mythological Horror
+# Echoes
 
 A first-person horror exploration game where the player enters ancient mythological locations in search of treasure.
 

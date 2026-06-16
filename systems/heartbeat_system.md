@@ -1,5 +1,7 @@
 # Heartbeat System
 
+full version is Expansion Milstone7+.
+
 ## Purpose
 
 Create tension and communicate danger.
