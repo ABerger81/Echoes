@@ -1,15 +1,16 @@
 using UnityEngine;
 
 
-// This script is attached to the candle object in the game. It allows the player to interact with the candle by pressing the "E" key when they are close enough to it. When the player interacts with the candle, it disables the box collider on the candle, making it non-interactable, and hides the table candle and shows the hand candle. This can be used to simulate the player picking up the candle and adding it to their inventory or using it by holding it in their hand.
+// This script is attached to the gun pickup object in the game. It allows the player to pick up the gun when they are close enough to it and press the "E" key. When the player picks up the gun, it disables the box collider on the gun pickup object, activates the hand gun model, and deactivates the table gun model. Additionally, it updates the UI to show that the player can pick up the gun when they are close enough to it, and hides the UI when they are not close enough.
 
-public class CandlePickUp : MonoBehaviour
+public class GunPickUp : MonoBehaviour
 {
     [SerializeField] bool canPick;
     [SerializeField] GameObject textOnScreen;
     [SerializeField] GameObject tableCandle;
     [SerializeField] GameObject handCandle;
-    [SerializeField] GameObject webEvent;
+    [SerializeField] GameObject handGun;
+    [SerializeField] GameObject tableGun;
 
     void Update()
     {
@@ -18,9 +19,10 @@ public class CandlePickUp : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E))
             {
                 this.GetComponent<BoxCollider>().enabled = false;
-                tableCandle.SetActive(false);
-                handCandle.SetActive(true);
-                webEvent.SetActive(true);
+                tableCandle.SetActive(true);
+                handCandle.SetActive(false);
+                tableGun.SetActive(false);
+                handGun.SetActive(true);
             }
         }
     }
@@ -30,7 +32,7 @@ public class CandlePickUp : MonoBehaviour
         if (PlayerCasting.distanceFromTarget < 5)
         {
             canPick = true;
-            UIController.actionText = "Candle";
+            UIController.actionText = "Hand Gun";
             UIController.commandText = "Pick Up";
             UIController.uiActive = true;
         }

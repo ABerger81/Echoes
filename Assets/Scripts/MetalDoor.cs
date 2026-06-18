@@ -2,8 +2,8 @@ using System.Collections;
 using UnityEngine;
 
 
-
 // This script is attached to the metal door object in the game. It allows the player to interact with the door by pressing the "E" key when they are close enough to it. When the player interacts with the door, it triggers a coroutine that temporarily switches the player's camera to a different view for 3 seconds before switching back to the original camera. This can be used to create a cinematic effect when the player opens the door.
+
 public class MetalDoor : MonoBehaviour
 {
     [SerializeField] bool canOpen;
