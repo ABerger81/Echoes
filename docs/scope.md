@@ -115,11 +115,11 @@ Definition of Done:
 
 Checklist:
 
-* [ ] Center-screen raycast exists
-* [ ] Interact key sends raycast
-* [ ] Raycast detects Interactable objects
-* [ ] Interaction triggers a response (pickup / inspect)
-* [ ] Interacted object disappears or changes state
+* [x] Center-screen raycast exists
+* [x] Interact key sends raycast
+* [x] Raycast detects Interactable objects
+* [x] Interaction triggers a response (pickup / inspect)
+* [x] Interacted object disappears or changes state
 
 Definition of Done:
 
