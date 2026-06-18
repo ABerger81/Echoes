@@ -24,9 +24,17 @@ Treasure Found
 ↓
 Monster Activated
 ↓
+Player's Light Extinguished or Dimmed
+↓
 Player Escapes
 ↓
 Success or Failure
+
+---
+
+# Monster Behavior (Resolved Design)
+
+No sight, no line-of-sight checks. The monster moves toward the most recent location it heard a sound, and wanders when nothing recent has been heard. It requires several continuous seconds of stillness and silence before fully losing track of the player — long enough that simply freezing isn't a guaranteed permanent escape. While actively hunting, its speed is slightly faster than the player's sprint speed, so outrunning it in a straight line isn't a viable strategy alone. This makes player noise — not the monster's intelligence — the core danger signal during Escape. Full detail in docs/mechanics.md (Escape / Chase); audio implementation in docs/audio_design.md.
 
 ---
 
@@ -54,6 +62,5 @@ Penalties:
 
 # Open Questions
 
-- Is monster behavior scripted (fixed patrol/predictable route) or reactive (chases based on player position/noise)?
 - Can the player drop or lose already-collected treasure if caught, or is it simply Game Over with no partial credit?
-- Are Safe Zones available during Escape, and do they carry the time limit described in mechanics.md?
+- If caught, is it instant Game Over, or a short forced "capture" sequence first?

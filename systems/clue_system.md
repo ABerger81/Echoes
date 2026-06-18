@@ -12,6 +12,8 @@ Clues should reward attention.
 
 Players should become more skilled through knowledge.
 
+Clue-based shortcuts are one of the few real advantages a player has against a monster that is otherwise just as fast as they are — see systems/escape_system.md.
+
 ---
 
 # Example

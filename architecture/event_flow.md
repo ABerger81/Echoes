@@ -10,6 +10,8 @@ Escape Triggered
 ↓
 Monster Activated
 ↓
+Player's Light Extinguished or Dimmed
+↓
 Heartbeat Increased
 
 ---
