@@ -111,7 +111,7 @@ Definition of Done:
 
 ---
 
-### Milestone 2 – Interaction System
+### Milestone 2 – Interaction System (Complete)
 
 Checklist:
 
