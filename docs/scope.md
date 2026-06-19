@@ -130,15 +130,15 @@ Definition of Done:
 
 ---
 
-### Milestone 3 – Treasure & Score System
+### Milestone 3 – Treasure & Score System (complete)
 
 Checklist:
 
-* [ ] Treasure prefab created
-* [ ] TreasureType enum created (Minor, Major)
-* [ ] Minor Treasure implemented (increases score)
-* [ ] Major Treasure implemented (triggers Escape Phase)
-* [ ] GameManager tracks and exposes current score
+* [x] Treasure prefab created
+* [x] TreasureType enum created (Minor, Major)
+* [x] Minor Treasure implemented (increases score)
+* [x] Major Treasure implemented (triggers Escape Phase)
+* [x] GameManager tracks and exposes current score
 
 Definition of Done:
 
