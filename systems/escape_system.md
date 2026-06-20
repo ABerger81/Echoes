@@ -12,7 +12,7 @@ The full system described below is an Expansion-phase target (scope.md Milestone
 
 ---
 
-## MVP Implementation (Milestone 4)
+## MVP Implementation (Milestones 4 & 5)
 
 ### Files
 
@@ -21,6 +21,8 @@ The full system described below is an Expansion-phase target (scope.md Milestone
 | `Assets/_Game/Scripts/Managers/GameManager/GameManager.cs` | Owns escape state, timer, and win/lose events |
 | `Assets/_Game/Scripts/Escape/ExitPoint.cs` | Trigger volume — detects Player + checks IsEscapeTriggered |
 | `Assets/_Game/Scripts/Escape/EscapeUI.cs` | Shows "ESCAPE! Find the exit." on screen, auto-hides after 4 s |
+| `Assets/_Game/Scripts/Player/CaptureHandler.cs` | Disables FirstPersonController + Interactor on capture or win |
+| `Assets/_Game/Scripts/Player/CaptureUI.cs` | Shows "You were captured." on screen, stays until restart |
 
 ### Event Flow
 
@@ -33,12 +35,18 @@ Player picks up Major Treasure
       → countdown timer starts
 
 Countdown hits zero
-  → OnTimerExpired?.Invoke()               ← Milestone 5 hooks here (death / capture)
+  → GameManager._isLevelOver = true
+  → OnTimerExpired?.Invoke()
+    → CaptureHandler.HandleCapture()       (movement + interaction disabled)
+    → CaptureUI.ShowCaptureMessage()       ("You were captured." on screen)
 
 Player walks into ExitPoint trigger
   → ExitPoint.OnTriggerEnter checks IsEscapeTriggered
     → true → GameManager.TriggerLevelComplete()
-      → OnLevelComplete?.Invoke()          ← Milestone 6 hooks here (win screen)
+      → GameManager._isLevelOver = true
+      → OnLevelComplete?.Invoke()
+        → CaptureHandler.HandleCapture()   (movement + interaction disabled)
+        → Milestone 6 hooks here           (win screen)
 ```
 
 ### Key Decisions

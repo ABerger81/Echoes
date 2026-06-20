@@ -51,8 +51,8 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        // Timer only runs after escape is triggered and while duration remains.
-        if (!IsEscapeTriggered || escapeTimerDuration <= 0f) return;
+        // Timer only runs after escape is triggered, while duration remains, and before the level ends.
+        if (!IsEscapeTriggered || _isLevelOver || escapeTimerDuration <= 0f) return;
 
         _escapeTimer -= Time.deltaTime;
 

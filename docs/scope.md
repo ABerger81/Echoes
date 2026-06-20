@@ -148,14 +148,14 @@ Definition of Done:
 
 ---
 
-### Milestone 4 – Basic Escape
+### Milestone 4 – Basic Escape (Complete)
 
 Checklist:
 
-* [ ] Major Treasure pickup raises an "Escape Triggered" event
-* [ ] Exit point exists and is detectable
-* [ ] Reaching the exit after escape is triggered ends the level successfully
-* [ ] (Optional for MVP) A simple non-AI threat exists — e.g. a timer, or a placeholder chaser with no real pathfinding
+* [x] Major Treasure pickup raises an "Escape Triggered" event
+* [x] Exit point exists and is detectable
+* [x] Reaching the exit after escape is triggered ends the level successfully
+* [x] (Optional for MVP) A simple non-AI threat exists — e.g. a timer, or a placeholder chaser with no real pathfinding
 
 Definition of Done:
 
@@ -165,14 +165,15 @@ Definition of Done:
 
 ---
 
-### Milestone 5 – Death / Capture State
+### Milestone 5 – Death / Capture State (Complete)
 
 Checklist:
 
-* [ ] Death/Capture state exists
-* [ ] Player input is disabled on capture
-* [ ] Capture event triggers correctly
-* [ ] Game Over state is reached reliably
+* [x] Death/Capture state exists
+* [x] Player input is disabled on capture
+* [x] Capture event triggers correctly
+* [x] Game Over state is reached reliably
+* [x] Capture feedback is shown to the player (text or screen effect)
 
 Definition of Done:
 
