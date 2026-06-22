@@ -8,7 +8,7 @@ Transform exploration into panic.
 
 # Scope Note
 
-The full system described below is an Expansion-phase target (scope.md Milestone 7+). The MVP version (Milestone 4) is intentionally minimal — a countdown timer adds urgency, no AI or pathfinding — just enough to prove the explore → trigger → escape → win/lose loop works.
+The full system described below is an Expansion-phase target (scope.md Milestone 12). The MVP version (Milestone 4) is intentionally minimal — a countdown timer adds urgency, no AI or pathfinding — just enough to prove the explore → trigger → escape → win/lose loop works.
 
 ---
 
@@ -19,10 +19,10 @@ The full system described below is an Expansion-phase target (scope.md Milestone
 | File | Role |
 |---|---|
 | `Assets/_Game/Scripts/Managers/GameManager/GameManager.cs` | Owns escape state, timer, and win/lose events |
+| `Assets/_Game/Scripts/Managers/UIManager/UIManager.cs` | Shows win/game-over panels with final score; Restart logic |
 | `Assets/_Game/Scripts/Escape/ExitPoint.cs` | Trigger volume — detects Player + checks IsEscapeTriggered |
 | `Assets/_Game/Scripts/Escape/EscapeUI.cs` | Shows "ESCAPE! Find the exit." on screen, auto-hides after 4 s |
 | `Assets/_Game/Scripts/Player/CaptureHandler.cs` | Disables FirstPersonController + Interactor on capture or win |
-| `Assets/_Game/Scripts/Player/CaptureUI.cs` | Shows "You were captured." on screen, stays until restart |
 
 ### Event Flow
 
@@ -38,7 +38,7 @@ Countdown hits zero
   → GameManager._isLevelOver = true
   → OnTimerExpired?.Invoke()
     → CaptureHandler.HandleCapture()       (movement + interaction disabled)
-    → CaptureUI.ShowCaptureMessage()       ("You were captured." on screen)
+    → UIManager.ShowGameOverPanel()        (score 0, cursor released)
 
 Player walks into ExitPoint trigger
   → ExitPoint.OnTriggerEnter checks IsEscapeTriggered
@@ -46,7 +46,7 @@ Player walks into ExitPoint trigger
       → GameManager._isLevelOver = true
       → OnLevelComplete?.Invoke()
         → CaptureHandler.HandleCapture()   (movement + interaction disabled)
-        → Milestone 6 hooks here           (win screen)
+        → UIManager.ShowWinPanel()         (final score, cursor released)
 ```
 
 ### Key Decisions
@@ -97,8 +97,8 @@ Player reaches exit.
 
 Rewards:
 
-- Score Saved
-- Leaderboard Entry
+- Final score shown on Win Panel
+- Local high score entry (Vertical Slice — Milestone 16)
 
 ---
 
@@ -115,5 +115,5 @@ Penalties:
 
 # Open Questions
 
-- Can the player drop or lose already-collected treasure if caught, or is it simply Game Over with no partial credit?
-- If caught, is it instant Game Over, or a short forced "capture" sequence first?
+- ~~Can the player drop or lose already-collected treasure?~~ — **Resolved (Milestone 6):** Lose-all. Score resets to 0 on capture.
+- ~~Is it instant Game Over or a short capture sequence?~~ — **Deferred to Expansion:** Instant for MVP. Capture sequence (sound, visual effect) belongs alongside full monster AI and audio tension.

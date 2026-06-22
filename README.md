@@ -1,6 +1,6 @@
 # Echoes
 
-A first-person horror exploration game where the player enters ancient mythological locations in search of treasure.
+A first-person horror exploration game set in the Victorian and Edwardian era (1880–1914). The player is an explorer entering ancient mythological locations in search of treasure.
 
 The player cannot fight.
 
@@ -32,7 +32,7 @@ This project is also a learning project focused on:
 
 ## Current Version
 
-v0.1.0
+v0.6.0
 
 Status: Prototype
 

@@ -37,6 +37,12 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        // Lock and hide the cursor immediately so the player doesn't need to
+        // click the Game view first. In a PC build this isn't needed (the game
+        // window has focus on launch), but it eliminates the editor click too.
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
         Treasure.OnCollected += HandleCollected;
     }
 
@@ -60,8 +66,10 @@ public class GameManager : MonoBehaviour
         {
             _isLevelOver = true;
             escapeTimerDuration = 0f; // prevent repeat firing
+            Score = 0;
+            OnScoreChanged?.Invoke(Score);
             OnTimerExpired?.Invoke();
-            Debug.Log("[GameManager] Timer expired. Capture triggered.");
+            Debug.Log("[GameManager] Timer expired. Capture triggered. Score reset to 0.");
         }
     }
 

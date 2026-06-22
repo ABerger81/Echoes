@@ -2,7 +2,7 @@
 
 ## Core Fantasy
 
-The player is an adventurer exploring dangerous mythological locations in search of treasure.
+The player is a Victorian-era explorer entering dangerous mythological locations in search of treasure.
 
 The player cannot defeat the monsters guarding these treasures.
 
