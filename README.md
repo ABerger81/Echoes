@@ -32,9 +32,18 @@ This project is also a learning project focused on:
 
 ## Current Version
 
-v0.6.0
+Current version: v0.7.0
 
-Status: Prototype
+v0.x.0 = all pre-release development | v1.0.0 = full game launch
+
+Status: Pre-Alpha
+
+Prototype -> Pre-Alpha -> Alpha -> Beta -> Release
+- Prototype = does the core loop work at all? (M1–M6 ✓)
+- Pre-Alpha = building out full systems, not yet feature-complete (M7–M17)
+- Alpha 	= Vertical Slice complete, portfolio-ready (M17)
+- Beta		= public playtesting, polish and bugfixes
+- Release	= v1.0.0, full game launch (Future Vision complete)
 
 ---
 

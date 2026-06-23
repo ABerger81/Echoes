@@ -225,16 +225,16 @@ Definition of Done:
 
 ## Expansion Milestones (Do Not Start Before MVP Complete)
 
-### Milestone 7 – Heartbeat & Tension System
+### Milestone 7 – Heartbeat & Tension System (Complete)
 
 Checklist:
 
-* [ ] Heartbeat state machine exists (Calm, Alert, Fear, Panic)
-* [ ] Noise hierarchy drives state transitions (idle/walk/collect/sprint)
-* [ ] Breathing is separate from heartbeat: heartbeat = internal, breathing = external/detectable
-* [ ] Breathing decays as heartbeat calms (not instant)
-* [ ] State transitions triggered by noise, monster proximity, escape trigger, jumpscares
-* [ ] Each state has at least a placeholder audio/visual response
+* [x] Heartbeat state machine exists (Calm, Alert, Fear, Panic)
+* [x] Noise hierarchy drives state transitions (idle/walk/collect/sprint)
+* [x] Breathing is separate from heartbeat: heartbeat = internal, breathing = external/detectable
+* [x] Breathing decays as heartbeat calms (not instant)
+* [x] State transitions triggered by noise, monster proximity, escape trigger, jumpscares
+* [x] Each state has at least a placeholder audio/visual response
 
 Definition of Done: see systems/heartbeat_system.md
 

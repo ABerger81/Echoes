@@ -129,6 +129,43 @@ The player judges by audio: when the breathing loop they hear has calmed, it is 
 
 ---
 
+# Implementation (M7)
+
+**Scripts:**
+- `Assets/_Game/Scripts/Managers/HeartbeatManager/HeartbeatManager.cs` — state machine, owns `_noisePressure` and `BreathingLevel`
+- `Assets/_Game/Scripts/Player/PlayerNoiseEmitter.cs` — reads player movement and treasure events, reports noise to HeartbeatManager
+- `Assets/_Game/Scripts/UI/HeartbeatVisuals.cs` — placeholder vignette overlay via CanvasGroup; to be replaced with URP Volume effect in M8
+
+**Noise thresholds:**
+
+| `_noisePressure` | State |
+|---|---|
+| < 0.25 | Calm |
+| ≥ 0.25 | Alert |
+| ≥ 0.50 | Fear |
+| ≥ 0.75 | Panic |
+
+**Noise inputs:**
+
+| Action | Method | Value |
+|---|---|---|
+| Walking | `SetContinuousNoise` | 0.3 |
+| Sprinting | `SetContinuousNoise` | 0.8 |
+| Minor Treasure collected | `AddNoiseBurst` | +0.25 |
+| Major Treasure / Escape triggered | forces `_noisePressure` = 1.0 | — |
+| Jumpscare (M14) | `PushUpOneStep` | +1 state |
+
+**Tuning defaults:**
+- `noiseDecayRate`: 0.15 — noise drains ~15% per second while the player is quiet
+- `breathingRiseRate`: 3.0 — breathing rises fast (immediate feedback)
+- `breathingDecayRate`: 0.1 — breathing decays slowly (~10 seconds from Panic to Calm)
+
+**Notes:**
+- Sprint detection reads `StarterAssetsInputs.sprint` directly — not inferred from speed, so tuning MoveSpeed or SprintSpeed never breaks it
+- Velocity uses horizontal magnitude only (`new Vector3(velocity.x, 0, velocity.z).magnitude`) — `CharacterController.velocity` includes Y from gravity, which would report noise while standing still
+
+---
+
 # Open Questions
 
 - ~~Can heartbeat affect movement?~~ — **Noted for Expansion:** At Panic state, reduced situational awareness is the MVP effect. Movement speed reduction could be added in Expansion as an additional Panic penalty.
