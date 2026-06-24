@@ -125,3 +125,4 @@ Future: `MythologyAudioProfile` ScriptableObject — one asset per mythology hol
 - `MythologyAudioProfile` ScriptableObject implementation — deferred to when second mythology exists
 - Exact jumpscare cooldown value — needs playtesting (see docs/audio_design.md)
 - How many simultaneous ambience layers before mix becomes muddy — needs implementation testing
+- Panic state decays during escape chase — with the placeholder timer (M4), noise pressure drops after the escape trigger because nothing keeps it elevated. Once the monster (M12) is active and chasing, it will generate continuous noise that maintains Panic naturally. Revisit after M12.
