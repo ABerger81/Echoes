@@ -204,7 +204,7 @@ Definition of Done:
 
 ---
 
-### Milestone 6 – UI System (Complete)
+### Milestone 6 – UI System (Incomplete)
 
 Checklist:
 
@@ -212,7 +212,7 @@ Checklist:
 * [x] Score updates when treasure is collected
 * [x] Win screen appears with final score
 * [x] Game Over screen appears with final score
-* [x] Restart button works and reloads scene cleanly
+* [ ] Restart button works and reloads scene cleanly (only if reached exit, not if captured)
 
 Definition of Done:
 
@@ -240,17 +240,17 @@ Definition of Done: see systems/heartbeat_system.md
 
 ---
 
-### Milestone 8 – Audio Tension System
+### Milestone 8 – Audio Tension System (Complete)
 
 Checklist:
 
-* [ ] AudioManager exists
-* [ ] Mixer Snapshots exist for each Heartbeat state
-* [ ] Music arc implemented: melodic at level start → texture at Alert/Fear → silence at Panic
-* [ ] Ambient ground layer plays and loops correctly per mythology
-* [ ] Breathing loop audio tied to heartbeat state
-* [ ] Jumpscare audio events trigger correctly
-* [ ] De-escalation blends slower than escalation
+* [x] AudioManager exists
+* [x] Mixer Snapshots exist for each Heartbeat state
+* [x] Music arc implemented: melodic at level start → texture at Alert/Fear → silence at Panic
+* [x] Ambient ground layer plays and loops correctly per mythology
+* [x] Breathing loop audio tied to heartbeat state
+* [x] Jumpscare audio events trigger correctly
+* [x] De-escalation blends slower than escalation
 
 Definition of Done: see docs/audio_design.md
 
