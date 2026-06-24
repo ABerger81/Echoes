@@ -11,9 +11,9 @@ public class PlayerNoiseEmitter : MonoBehaviour
     // ── Tuning ────────────────────────────────────────────────────────────
 
     [SerializeField] private float walkNoiseLevel = 0.3f;
-    [SerializeField] private float sprintNoiseLevel = 0.8f;
+    [SerializeField] private float sprintNoiseLevel = 0.65f;
 
-    // Reads sprint state directly from StarterAssets input rather than interferring from speed.
+    // Reads sprint state directly from StarterAssets input rather than inferring from speed.
     [SerializeField] private StarterAssetsInputs starterAssetsInputs;
     [SerializeField] private float collectNoiseBurst = 0.25f;
 
@@ -51,6 +51,12 @@ public class PlayerNoiseEmitter : MonoBehaviour
     // Sidequest collectibles added at M13.
     private void HandleCollected(TreasureType type)
     {
-        if (type == TreasureType.Minor) heartbeatManager.AddNoiseBurst(collectNoiseBurst);
+        if (type == TreasureType.Minor)
+        {
+            heartbeatManager.AddNoiseBurst(collectNoiseBurst);
+#if UNITY_EDITOR
+            Debug.Log($"[PlayerNoiseEmitter] Collect burst: +{collectNoiseBurst}");
+#endif
+        }
     }
 }

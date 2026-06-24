@@ -69,7 +69,9 @@ public class GameManager : MonoBehaviour
             Score = 0;
             OnScoreChanged?.Invoke(Score);
             OnTimerExpired?.Invoke();
+#if UNITY_EDITOR
             Debug.Log("[GameManager] Timer expired. Capture triggered. Score reset to 0.");
+#endif
         }
     }
 
@@ -82,14 +84,18 @@ public class GameManager : MonoBehaviour
             case TreasureType.Minor:
                 Score += 100;
                 OnScoreChanged?.Invoke(Score);
+#if UNITY_EDITOR
                 Debug.Log($"[GameManager] Minor treasure collected. Score: {Score}");
+#endif
                 break;
 
             case TreasureType.Major:
                 IsEscapeTriggered = true;
                 _escapeTimer = escapeTimerDuration;
                 OnEscapeTriggered?.Invoke();
+#if UNITY_EDITOR
                 Debug.Log("[GameManager] Escape triggered! Reach the exit.");
+#endif
                 break;
         }
     }
@@ -100,6 +106,8 @@ public class GameManager : MonoBehaviour
         if (_isLevelOver) return;
         _isLevelOver = true;
         OnLevelComplete?.Invoke();
+#if UNITY_EDITOR
         Debug.Log("[GameManager] Level complete!");
+#endif
     }
 }

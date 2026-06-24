@@ -1,5 +1,48 @@
 # Audio Design
 
+Assets/_Game/Audio/
+Ambience/
+├─ Hub/              Warm, interior. Crackling fireplace, distant chatter, clock ticking.
+│                    Civilized and safe — contrast to the levels.
+├─ Labyrinth/        Cold stone, distant echo, low wind through corridors.
+│                    Enclosed, ancient, no living thing nearby.
+├─ SerpentTemple/    Dripping water, deep cavern hum, damp hollow resonance.
+├─ Tomb/             Dry, still. Sand whisper, faint resonance, absolute silence underneath.
+└─ Shrine/           Wind through bamboo, distant temple bell, wooden creak.
+
+Breathing/           Involuntary, physical. Frightened exertion calming down.
+                     Not stylized. Not dying. Just a body betraying fear.
+
+Music/
+├─ Hub/              Victorian orchestral. Warm, period-appropriate. Humable.
+├─ Melody/           Same feel as Hub but exploration-flavored. Curiosity, not dread.
+└─ Texture/          No melody, no rhythm. Bowed strings, low organ tone.
+                     Felt rather than heard. Indistinguishable from ambience.
+
+SFX/
+├─ Interaction/      Door creak, stone scrape, metal latch, pickup chime.
+├─ Jumpscare/
+│   ├─ Acousticophobia/    Sudden loud sting. Directional. Pure shock.
+│   ├─ Scopophobia/        A breath from behind. Quiet. The sense of being watched.
+│   ├─ Nyctophobia/        Deep silence deepening further — then a sting.
+│   ├─ Thanatophobia/      Creak, settling, something long dead shifting.
+│   ├─ Entomophobia/       Skittering burst. Brief. Directional. Floor level.
+│   ├─ Chiroptophobia/     Rush of wingbeats from darkness.
+│   └─ Musophobia/         Rapid scrabbling. Brief. Floor level.
+├─ Monster/
+│   ├─ Labyrinth/    Hoofbeats, bull breath, distant roar, heavy stomps.
+│   ├─ SerpentTemple/Hiss, scale-dragging on stone, venom-hiss, bone rattle.
+│   ├─ Tomb/         TBD — bone percussion, resonant breath, stone grinding.
+│   └─ Shrine/       TBD — shuffling on wood, distant growl, cracking timber.
+├─ Sidequest/        Altar: ancient resonant acceptance tone.
+│                    Torch ignition: low whomp, crackle, spreading flame.
+└─ UI/               Subtle. Menu click, score increment. Never jarring.
+
+Torch/               Ignite whomp, steady flicker loop, extinguish hiss.
+
+
+
+
 ## Purpose
 
 Formalizes how audio communicates the Heartbeat state, danger, and discovery. Audio is the primary tension delivery system for this game — visuals and UI stay minimal so sound carries the emotional load.

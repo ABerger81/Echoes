@@ -13,7 +13,9 @@ public class TestInteractable : MonoBehaviour, IInteractable
     {
         // Log confirms Interact() was reached. The prefix makes it easy to
         // filter in the Console when other scripts are also logging.
+#if UNITY_EDITOR
         Debug.Log("[TestInteractable] Interact() called.");
+#endif
 
         // Colour change gives a visual confirmation without needing the UI
         // to be built yet. GetComponent here is fine — Interact() is not

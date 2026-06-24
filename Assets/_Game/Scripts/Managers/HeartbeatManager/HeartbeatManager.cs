@@ -22,7 +22,7 @@ public class HeartbeatManager : MonoBehaviour
     // ── Tuning ────────────────────────────────────────────────────────────
 
     // How fast noise drains when the player is quiet. Lower = longer tension.
-    [SerializeField] private float noiseDecayRate = 0.15f;
+    [SerializeField] private float noiseDecayRate = 0.05f;
 
     // Breathing rises fast (instant feedback) but decays slow (hiding tension).
     [SerializeField] private float breathingRiseRate = 3f;
@@ -96,6 +96,9 @@ public class HeartbeatManager : MonoBehaviour
     {
         CurrentState = newState;
         OnStateChanged?.Invoke(newState);
+#if UNITY_EDITOR
+        Debug.Log($"[HeartbeatManager] State: {newState}");
+#endif
     }
 
     // Major Treasure picked up - force Panic immediately regardless of current noise.

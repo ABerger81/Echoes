@@ -156,9 +156,10 @@ The player judges by audio: when the breathing loop they hear has calmed, it is 
 | Jumpscare (M14) | `PushUpOneStep` | +1 state |
 
 **Tuning defaults:**
-- `noiseDecayRate`: 0.15 — noise drains ~15% per second while the player is quiet
+- `noiseDecayRate`: 0.05 — noise drains slowly; keeps Panic state for ~3 seconds after a burst before stepping down
 - `breathingRiseRate`: 3.0 — breathing rises fast (immediate feedback)
 - `breathingDecayRate`: 0.1 — breathing decays slowly (~10 seconds from Panic to Calm)
+- `sprintNoiseLevel`: 0.65 — sprint alone reaches Fear; Panic requires sprint + treasure burst combined
 
 **Notes:**
 - Sprint detection reads `StarterAssetsInputs.sprint` directly — not inferred from speed, so tuning MoveSpeed or SprintSpeed never breaks it
