@@ -8,6 +8,62 @@ Mechanics describe rules — what a system does from the player's perspective. T
 
 ---
 
+# Player Movement
+
+Three movement modes: Walk (WASD), Sprint (WASD + Hold Shift), and Sneak (WASD + Hold Ctrl, added M11).
+
+**No jump mechanic.** Jumping does not fit the horror tone, breaks the level geometry assumptions (vault over barriers intended to force routing decisions), and creates hiding exploits. This is a permanent design decision — not a deferred feature.
+
+## Related Systems
+
+- systems/heartbeat_system.md — noise levels per movement mode
+- docs/mechanics.md — Sneak Mode
+
+---
+
+# Sneak Mode
+
+## Description
+
+Third movement mode. Hold Left Ctrl to initiate a breath-hold. A deep inhale audio cue plays on activation — the player is consciously suppressing their breathing.
+
+The player can hold their breath for 8–12 seconds. Two outcomes when they stop:
+
+- **Voluntary release** (player releases Ctrl before timer): no noise burst. Releasing on time costs nothing.
+- **Forced exhale** (timer expires): small `AddNoiseBurst`. Holding too long has a penalty.
+
+While holding breath, movement noise level drops to 0.1 — below the Alert threshold (0.25). Moving slowly while sneaking does not escalate heartbeat state, provided pressure is already below 0.1. Pressure above 0.1 continues to decay naturally regardless.
+
+Sneak is slower than Walk (~40–50% of walk speed). The noise benefit comes at a movement cost. This is a genuine choice: slower and quieter vs. faster and louder.
+
+**Hold, not toggle.** Toggle allows set-and-forget sneaking. Hold keeps sneak intentional — the player must commit to each use.
+
+## Safe Zone Constraint
+
+Sneak cannot be used to accelerate breathing decay inside a safe zone. `IsInSafeZone` already blocks `SetContinuousNoise` entirely, so the sneak noise level (0.1) has no effect when already inside. Holding Ctrl inside a safe zone is neutral — it does not help or hurt.
+
+## Inputs
+
+* Left Ctrl (Hold)
+* WASD (simultaneous)
+
+## Outputs
+
+* Deep inhale audio cue on activation
+* Movement noise level 0.1 while holding
+* Small `AddNoiseBurst` on forced exhale (timer expired only)
+
+## Milestone
+
+M11 (Expansion). See systems/heartbeat_system.md — Sneak Mode.
+
+## Related Systems
+
+* Heartbeat System
+* AudioManager — sneak breath audio
+
+---
+
 # Interaction
 
 ## Description

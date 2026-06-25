@@ -24,6 +24,10 @@ Clues are locked behind a three-stage optional sidequest. Completing it is never
 
 Three IInteractable objects hidden across the level — in dark corners, off-path areas, places that require the player to explore rather than rush. Each pickup triggers a subtle heartbeat tick and a faint atmospheric sound. By the third, the player understands: someone was here before them.
 
+**Collectible HUD.** Three inventory slots are visible during play. Slots fill silently as items are collected — no label, no text, no confirmation message. The three empty squares at the start are the only hint that something exists to find. A player who never attempts the sidequest may not understand what the slots mean until they find the first item.
+
+**Mixed collectibles.** Additional non-sidequest items are placed alongside the three ritual objects. These look collectable but cannot be offered at the altar. The player must observe and judge which items belong to the ritual. This ambiguity is intentional: the previous explorer's belongings included things that did not matter, and the player inherits that uncertainty.
+
 **Number 3 is mythologically resonant across every planned mythology:**
 - Greek: three Fates, three Furies, three-headed Cerberus
 - Norse: three roots of Yggdrasil, three Norns

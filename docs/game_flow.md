@@ -69,6 +69,7 @@ Playing → WinPanel / GameOverPanel → Hub
 **Settings Panel:**
 - Master volume slider
 - Mouse sensitivity slider
+- Key mapping — rebindable controls; default bindings shown
 - Back — returns to Pause menu
 
 ---

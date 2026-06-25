@@ -42,6 +42,8 @@ During Exploration (before Major Treasure is collected), the monster wanders pas
 - Proximity escalates heartbeat → jumpscares become more likely → Panic state possible → accidental escape trigger possible
 - The monster being nearby is not immediately fatal; it becomes a threat if the player makes more noise
 
+**Discovery trigger — Hunted Mode:** If the monster discovers the player during Exploration (definition: see Open Questions below), HeartbeatManager switches to Hunted Mode — the same harder parameter set as the escape trigger. Once active, the switch is permanent until exit or capture. See systems/heartbeat_system.md — Phase Shift / Hunted Mode.
+
 ---
 
 # Escape Phase — Active Hunt
@@ -82,6 +84,14 @@ See docs/audio_design.md (Per-Mythology Ambient Layering) and docs/mythology.md.
 # Milestone
 
 Expansion — Milestone 12. Requires Heartbeat System (M7) to exist first — monster detection feeds the heartbeat state machine, and the heartbeat state machine drives the monster's consequence on the player.
+
+---
+
+# Open Questions
+
+- What exactly constitutes "monster discovers player"? Options: monster entering hunt state, monster reaching a last-known position, or an explicit "line of sight" event. Resolve during M12 planning. The definition affects when Hunted Mode triggers during Exploration.
+- If the monster discovers the player very early (first room), is a full-game Hunted Mode intended or too punishing?
+- If Hunted Mode triggers on discovery, and the player then hides and the monster returns to patrol — do parameters stay hard? (Intent: yes.)
 
 ---
 

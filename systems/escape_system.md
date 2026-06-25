@@ -31,7 +31,7 @@ Player picks up Major Treasure
   → Treasure.OnCollected(TreasureType.Major)
     → GameManager.HandleCollected(Major)
       → IsEscapeTriggered = true
-      → OnEscapeTriggered?.Invoke()        ← Milestone 7 hooks here (heartbeat escalation)
+      → OnEscapeTriggered?.Invoke()        ← M7: heartbeat escalation (force Panic); M11: Hunted Mode switch (harder parameters)
       → countdown timer starts
 
 Countdown hits zero

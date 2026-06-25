@@ -151,6 +151,45 @@ The breathing loop continues inside the safe zone until heartbeat calms. The pla
 
 ---
 
+# Hunted Mode Audio — Escape Trigger One-Shot
+
+When `OnEscapeTriggered` fires (Major Treasure collected), two audio events happen simultaneously:
+
+1. **HeartbeatManager transition to Panic** — automatic; AudioManager already snaps to the Panic snapshot (no music, heartbeat dominates, heavy breathing). This is the internal response.
+2. **Monster vocalization one-shot** — a single mythology-specific monster sound plays at that moment. This is the external signal: the creature heard you, and it is coming.
+
+| Mythology | One-shot vocalization |
+|---|---|
+| Greek / Minotaur | Deep resonant roar — bull-throated, close, from no fixed direction |
+| Norse / Jörmungandr | Long hiss — slow, deliberate, like something enormous becoming aware |
+| Egyptian (planned) | TBD |
+| Japanese (planned) | TBD |
+
+The vocalization is diegetic — it comes from the monster, not from a score cue or UI event. It must never feel like a musical sting. It is the creature announcing itself.
+
+**Implementation (M11):** Fire the one-shot from `AudioManager` on `GameManager.OnEscapeTriggered`. A single `AudioSource.PlayOneShot(escapeVocalizationClip)` at the moment of trigger. One clip per mythology, configurable per `MythologyAudioProfile`.
+
+See systems/heartbeat_system.md — Phase Shift / Hunted Mode.
+
+---
+
+# Sneak Mode Audio
+
+Sneak is activated by holding Left Ctrl. The breath-hold is communicated entirely through audio — no UI indicator, no visual feedback.
+
+| Moment | Audio |
+|---|---|
+| Ctrl pressed (activation) | Deep inhale clip plays once — the player consciously taking a breath before holding it |
+| While holding | Breathing loop stops — the player cannot hear themselves breathing; silence is the signal |
+| Voluntary release (Ctrl released before timer) | Quiet exhale; no sting; no drama |
+| Forced exhale (timer expires) | Sharp exhale with a subtle tension sting — the body betraying the player |
+
+The absence of the breathing loop during a hold is the primary feedback. The player "knows" they are quiet because they cannot hear themselves. When the forced exhale fires, the sting makes the cost immediate and visceral.
+
+See docs/mechanics.md — Sneak Mode.
+
+---
+
 # Sidequest Audio
 
 ## Altar Offering Acceptance

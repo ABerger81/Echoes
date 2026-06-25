@@ -288,24 +288,48 @@ Definition of Done: see systems/clue_system.md
 
 ---
 
-### Milestone 11 – Pause Menu
+### Milestone 11 – Pause Menu, Sneak Mode & HUD
 
 Checklist:
 
+**Pause Menu:**
 * [ ] Escape key opens pause menu during Playing state
 * [ ] Time.timeScale = 0 while paused
 * [ ] Pause menu contains: Resume, Restart Level, Quit to Main Menu, Settings
-* [ ] Settings panel contains: master volume slider, mouse sensitivity slider
+* [ ] Settings panel contains: master volume slider, mouse sensitivity slider, key mapping (rebindable; defaults shown)
 * [ ] Cursor unlocked and visible in pause menu
 * [ ] Cursor re-locked and hidden on Resume
 * [ ] Restart from pause menu works identically to Restart from end screen
+
+**Sneak Mode:**
+* [ ] Hold Left Ctrl activates breath-hold; deep inhale audio cue plays on activation
+* [ ] Sneak speed: ~40–50% of walk speed
+* [ ] Sneak noise level: 0.1 — below Alert threshold (0.25); movement while sneaking does not escalate state
+* [ ] Breath-hold timer: 8–12 seconds maximum; no UI countdown
+* [ ] Voluntary release (release Ctrl before timer expires): no noise burst
+* [ ] Forced exhale (timer expires): small AddNoiseBurst
+* [ ] Ctrl held inside a safe zone has no effect on breathing decay — not a usable exploit
+
+**Hunted Mode:**
+* [ ] HeartbeatManager: second parameter set implemented (slower noise decay, sprint alone reaches Panic)
+* [ ] Hunted Mode activates permanently on escape trigger (Major Treasure collected)
+* [ ] Mythology-specific monster vocalization fires as a one-shot on escape trigger (Minotaur roar, serpent hiss, etc.) — the external signal that the hunt has started; Panic audio transition happens automatically alongside it
+
+**HUD:**
+* [ ] Treasure score: running numeric total always visible (0 → 100 → 200 as treasure is collected — never fraction format)
+* [ ] Movement mode icons: three small icons always visible, active icon highlighted — Sneak (breath icon), Walk (footprints), Sprint (running figure)
+* [ ] Heartbeat state: audio only — no visual indicator of any kind
+* [ ] Collectible slots: deferred to M13
 
 Definition of Done:
 
 * All pause menu options work correctly
 * Game state is fully preserved on Resume (no dropped events, no timer drift)
-* Settings values take effect immediately
-* See docs/game_flow.md
+* Settings values take effect immediately, including key remapping
+* Sneak mode: noise level correct; timer fires; forced exhale triggers burst; voluntary release does not; deep inhale / held silence / exhale audio cues all play correctly
+* Hunted Mode: parameters switch on escape trigger; monster vocalization fires once; player can hear/feel the difference
+* HUD: score updates live on each treasure pickup; movement icon switches correctly on each mode change; no heartbeat visual anywhere
+* See docs/game_flow.md and systems/heartbeat_system.md
 
 ---
 
@@ -318,6 +342,7 @@ Checklist:
 * [ ] Monster wanders semi-randomly when no noise detected for X seconds
 * [ ] Monster cannot enter safe zones (threshold respected)
 * [ ] Monster transitions to active hunt on OnEscapeTriggered
+* [ ] Monster discovery triggers Hunted Mode in HeartbeatManager (same parameter switch as escape trigger)
 * [ ] Monster extinguishes or dims player's carried light on escape trigger
 * [ ] Active hunt speed is slightly faster than player sprint
 
@@ -337,6 +362,8 @@ Definition of Done:
 Checklist:
 
 * [ ] 3 IInteractable sidequest collectibles placed in off-path areas
+* [ ] Additional non-sidequest interactable objects placed alongside them — player must judge which items belong to the ritual
+* [ ] Collectible HUD: 3 inventory slots visible during play; fills as sidequest items are collected (no label, no text)
 * [ ] IInteractable altar exists and accepts offerings
 * [ ] Altar triggers when all 3 items have been offered
 * [ ] Hidden room opens after offering is accepted
