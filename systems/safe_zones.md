@@ -67,9 +67,40 @@ Expansion — Milestone 9.
 
 ---
 
+# Implementation (M9)
+
+**Scripts:**
+- `Assets/_Game/Scripts/Environment/SafeZone.cs` — trigger volume; calls `HeartbeatManager.EnterSafeZone()` / `ExitSafeZone()` on player enter/exit
+
+**HeartbeatManager additions:**
+- `public static bool IsInSafeZone` — read by monster system (M12) to stop pursuit at the threshold
+- `public void EnterSafeZone()` — sets flag; blocks `SetContinuousNoise()` so movement no longer raises noise pressure
+- `public void ExitSafeZone()` — clears flag; movement noise resumes immediately
+
+**How noise suppression works:** `SetContinuousNoise()` early-returns when `IsInSafeZone` is true. Existing `_noisePressure` continues to decay via `noiseDecayRate` in `Update()` — no extra code. The player's breathing calms naturally as state steps down through Fear → Alert → Calm.
+
+**Monster threshold (M12):** `IsInSafeZone` is the hook. Monster AI reads this flag and stops pursuit when true. Not implemented until M12.
+
+**Scene:**
+- `SafeZone_01` — empty GameObject with Box Collider (Is Trigger, ~1.5 × 2 × 1.5), placed in a dead end off the main path
+
+**Verified in M9:**
+- Trigger fires correctly on enter and exit
+- Movement noise suppressed while inside; state decays to Calm with no player input
+- State on exit resumes from current pressure, not reset to zero
+- Minor treasure burst (`AddNoiseBurst`) still fires inside — design intent: don't collect treasure while hiding
+- `IsInSafeZone` resets cleanly on Play/Stop (Awake + OnDestroy reset)
+
+**Not yet verified (requires M12):**
+- Monster stops at the threshold
+- Player learns "position hidden" through monster behaviour
+
+---
+
 # Related Systems
 
 - systems/heartbeat_system.md — Breathing Down (two-stage hiding experience)
+- systems/audio_system.md — breathing loops are the primary audio feedback for the two-stage hiding experience
 - systems/monster_system.md — monster patrol and why it does not re-check cleared safe zones
 - systems/clue_system.md — sidequest hidden room as safe zone
 - docs/mechanics.md — Safe Zone / Hiding (player-facing mechanic description)

@@ -4,6 +4,7 @@ using StarterAssets;
 // Disables player movement and interaction when the level ends (win or capture).
 // Wired in the Inspector — no scene search needed.
 public class CaptureHandler : MonoBehaviour
+
 {
     // FirstPersonController lives on FPC/PlayerCapsule.
     // Disabling it stops Update() and LateUpdate(), freezing movement and look.
@@ -12,6 +13,8 @@ public class CaptureHandler : MonoBehaviour
     // Interactor lives on FPC/MainCamera.
     // Disabling it stops the raycast and E-key check.
     [SerializeField] private Interactor interactor;
+
+    private bool _levelEnded;
 
     private void Awake()
     {
@@ -27,7 +30,19 @@ public class CaptureHandler : MonoBehaviour
 
     private void HandleCapture()
     {
+        _levelEnded = true;
         playerController.enabled = false;
         interactor.enabled = false;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
+    private void OnApplicationFocus(bool hasFocus)
+    {
+        if (hasFocus && _levelEnded)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
     }
 }

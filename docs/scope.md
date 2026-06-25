@@ -256,15 +256,15 @@ Definition of Done: see docs/audio_design.md
 
 ---
 
-### Milestone 9 – Safe Zones
+### Milestone 9 – Safe Zones (Complete when M12 is Complete)
 
 Checklist:
 
-* [ ] Safe Zone trigger volume exists
-* [ ] Heartbeat decreases while inside a Safe Zone
+* [x] Safe Zone trigger volume exists
+* [x] Heartbeat decreases while inside a Safe Zone
 * [ ] Monster cannot enter Safe Zone (mythology-consistent threshold — carved symbol, rune, etc.)
-* [ ] No time limit — player leaves when breathing calms and monster sounds distant
-* [ ] Two-stage experience works: position hidden on entry, breathing must calm before safe to move
+* [x] No time limit — player leaves when breathing calms and monster sounds distant (requires M12, Timer is placeholder)
+* [x] Two-stage experience works: position hidden on entry, breathing must calm before safe to move (Breathing works, Monster behavior verified in M12)
 
 Definition of Done:
 

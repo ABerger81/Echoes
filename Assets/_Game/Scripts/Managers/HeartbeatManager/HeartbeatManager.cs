@@ -13,6 +13,8 @@ public class HeartbeatManager : MonoBehaviour
     // 0= silent, 1 = heavy. Rises fast with heartbeat, decays slowly.
     // Monster system (M12) reads this - elevated breathing is detectable even when still.
     public static float BreathingLevel { get; private set; }
+    // True while player is inside a safe zone. Monster system (M12) reads this.
+    public static bool IsInSafeZone { get; private set; }
 
     // ── Events ────────────────────────────────────────────────────────────
 
@@ -40,6 +42,7 @@ public class HeartbeatManager : MonoBehaviour
     {
         CurrentState = HeartbeatState.Calm;
         BreathingLevel = 0f;
+        IsInSafeZone = false;
         GameManager.OnEscapeTriggered += HandleEscapeTrigger;
     }
 
@@ -49,6 +52,7 @@ public class HeartbeatManager : MonoBehaviour
     {
         CurrentState = HeartbeatState.Calm;
         BreathingLevel = 0f;
+        IsInSafeZone = false;
         GameManager.OnEscapeTriggered -= HandleEscapeTrigger;
     }
 
@@ -114,6 +118,7 @@ public class HeartbeatManager : MonoBehaviour
     // Uses Max so it only raises pressure - decay happens in Update().
     public void SetContinuousNoise(float level)
     {
+        if (IsInSafeZone) return;
         _noisePressure = Mathf.Max(_noisePressure, Mathf.Clamp01(level));
     }
 
@@ -127,5 +132,21 @@ public class HeartbeatManager : MonoBehaviour
     public void PushUpOneStep()
     {
         if (CurrentState < HeartbeatState.Panic) ChangeState((HeartbeatState)((int)CurrentState + 1));
+    }
+
+    public void EnterSafeZone()
+    {
+        IsInSafeZone = true;
+#if UNITY_EDITOR
+        Debug.Log("[HeartbeatManager] Entered safe zone");
+#endif
+    }
+
+    public void ExitSafeZone()
+    {
+        IsInSafeZone = false;
+#if UNITY_EDITOR
+        Debug.Log("[HeartbeatManager] Exited safe zone");
+#endif
     }
 }

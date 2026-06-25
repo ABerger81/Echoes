@@ -32,7 +32,7 @@ This project is also a learning project focused on:
 
 ## Current Version
 
-Current version: v0.8.0
+Current version: v0.9.0
 
 v0.x.0 = all pre-release development | v1.0.0 = full game launch
 

@@ -129,6 +129,51 @@ The player judges by audio: when the breathing loop they hear has calmed, it is 
 
 ---
 
+# Pre-M12 Design Intent — Sneak Mode (M11)
+
+Third movement mode added alongside Walk (W) and Sprint (W + Shift).
+
+| Mode | Input | `sneakNoiseLevel` | Speed |
+|---|---|---|---|
+| Sneak | WASD + Hold Left Ctrl | 0.1 | ~40–50% of walk |
+| Walk | WASD | 0.3 | normal |
+| Sprint | WASD + Hold Left Shift | 0.65 | fast |
+
+**Why 0.1 matters:** `SetContinuousNoise` uses `Mathf.Max` — it can only raise pressure. A sneakNoiseLevel of 0.1 is below the Alert threshold (0.25). While pressure is already above 0.1 (e.g. Fear), the sneak call does nothing and normal decay continues — identical to standing still but mobile. While at Calm (pressure near zero), sneak floors pressure at 0.1, keeping the player below Alert. Sneak = move without triggering Alert.
+
+**Hold, not toggle.** Toggle allows players to set-and-forget and always sneak. Hold keeps sneak intentional and temporarily costly.
+
+**Safe zone exploit constraint.** `IsInSafeZone` already blocks `SetContinuousNoise` entirely. Inside a safe zone, sneak's only effect (low noise input) is already moot. Sneak must never directly modify `breathingDecayRate`, `_noisePressure`, or `BreathingLevel` — only operate via `sneakNoiseLevel`. This ensures holding Ctrl inside a safe zone has no effect on how fast breathing calms.
+
+**"No completing by sneaking" is a level design constraint.** Monster patrol timing, safe zone exits, and time-pressure pickups must create situations where sneak is too slow. The noise system alone does not prevent a full-game sneak run.
+
+---
+
+# Phase Shift — Hunted Mode (Post-M12 Design Intent)
+
+Two distinct gameplay phases require two distinct difficulty profiles for the noise/heartbeat system:
+
+**Exploration phase** — should feel relatively permissive. The player can sprint, collect, and make mistakes without immediate punishment. The monster is present but passive. The system is forgiving enough that observant play feels safe.
+
+**Hunted phase** — activated when the player is discovered by the monster OR when the Major Treasure is collected (escape triggered). Whichever happens first, the mode switch is permanent until exit or capture. The system becomes measurably harder:
+
+| Parameter | Exploration | Hunted |
+|---|---|---|
+| `noiseDecayRate` | 0.05 (current) | ~0.02 (slower decay — Panic lasts longer) |
+| `sprintNoiseLevel` | 0.65 (sprint → Fear) | ~0.80 (sprint alone → Panic) |
+
+This makes safe zones essential in the hunted phase rather than merely useful. The player must judge every movement decision — walking vs. sprinting, entering a safe zone vs. pushing toward the exit.
+
+**Signal to the player:** the mode switch must have a visible/audible cue. Without it, the sudden difficulty increase reads as a bug. Minimum: a heartbeat audio spike at the moment of switch. Design the cue before wiring the trigger.
+
+**Open design questions (resolve during M12 planning):**
+- What exactly constitutes "monster discovers player"? Hunt-state entry, line-of-sight, or reaching a last-known position?
+- If the monster discovers the player very early (first room), is a full-game hunted mode intended or too punishing?
+- If hunted mode triggers on discovery, and the player then hides and the monster returns to patrol — do parameters stay hard? (Intent: yes — the monster is aware and will return.)
+- Does hunted mode need a minimum safe zone decay time to prevent impossible situations? (Recommendation: yes — cap minimum decay so Calm is reachable in ≤20s even in hard mode.)
+
+---
+
 # Implementation (M7)
 
 **Scripts:**
@@ -150,7 +195,7 @@ The player judges by audio: when the breathing loop they hear has calmed, it is 
 | Action | Method | Value |
 |---|---|---|
 | Walking | `SetContinuousNoise` | 0.3 |
-| Sprinting | `SetContinuousNoise` | 0.8 |
+| Sprinting | `SetContinuousNoise` | 0.65 |
 | Minor Treasure collected | `AddNoiseBurst` | +0.25 |
 | Major Treasure / Escape triggered | forces `_noisePressure` = 1.0 | — |
 | Jumpscare (M14) | `PushUpOneStep` | +1 state |
