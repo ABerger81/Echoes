@@ -36,7 +36,7 @@ Escalation is fast (sudden danger). De-escalation is slow (earned calm).
 
 ```
 Master
-├─ Music
+├─ Melody
 ├─ Ambience
 │   ├─ Ambience_A      ← base layer, always present
 │   ├─ Ambience_B      ← secondary layer, fades in at Alert
@@ -46,8 +46,15 @@ Master
 │   ├─ Breathing_Alert
 │   ├─ Breathing_Fear
 │   └─ Breathing_Panic
-└─ SFX
+├─ SFX
+└─ Heartbeat
 ```
+
+Per-state melody volume:
+
+| Group | Calm | Alert | Fear | Panic |
+|---|---|---|---|---|
+| Melody | 0 dB | −12 dB | −80 dB | −80 dB |
 
 Per-state ambience layer volumes (set per snapshot in the mixer):
 
@@ -101,9 +108,13 @@ Future: `MythologyAudioProfile` ScriptableObject — one asset per mythology hol
 - `Assets/_Game/Audio/EchoesAudioMixer` — groups, sub-groups, four snapshots with per-group volumes set
 
 **AudioSources on AudioManager GameObject:**
-- Ambience_A, Ambience_B, Ambience_Deep, Ambience_Drips (four ambience layers)
-- MusicMelody, MusicTexture (no clips yet — Vertical Slice)
-- Breathing_Alert, Breathing_Fear, Breathing_Panic (three breathing loops)
+- Ambience_A, Ambience_B, Ambience_Deep, Ambience_Drips (four ambience layers, routed to Ambience sub-groups)
+- Breathing_Alert, Breathing_Fear, Breathing_Panic (three breathing loops, routed to Breathing sub-groups)
+- SFX source (2D, Spatial Blend = 0, routed to SFX group) — pickup chime and other flat one-shot SFX
+
+**AudioSources on child GameObjects:**
+- `HeartbeatSource` child GO — looping heartbeat clip (`SFX_heartbeat_60_bpm`), routed to Heartbeat group
+- `MelodySource` child GO — Holst St. Paul's Suite Op. 29 No. 2, III. Intermezzo (Musopen PD), routed to Melody group, loop = true
 
 **Tuning defaults:**
 - `escalateBlend`: 0.3s — fast on the way up
@@ -126,3 +137,4 @@ Future: `MythologyAudioProfile` ScriptableObject — one asset per mythology hol
 - Exact jumpscare cooldown value — needs playtesting (see docs/audio_design.md)
 - How many simultaneous ambience layers before mix becomes muddy — needs implementation testing
 - Panic state decays during escape chase — with the placeholder timer (M4), noise pressure drops after the escape trigger because nothing keeps it elevated. Once the monster (M12) is active and chasing, it will generate continuous noise that maintains Panic naturally. Revisit after M12.
+- Musical texture layer (ambient/diegetic underlay replacing melody at Alert/Fear) — not yet implemented. Will use a Caves & Dungeons track routed through the Melody group; separate AudioSource and mixer routing deferred to Vertical Slice.

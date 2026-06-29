@@ -14,6 +14,16 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private float escalateBlend = 0.3f;
     [SerializeField] private float deEscalateBlend = 3.0f;
 
+    // ── SFX Clips ─────────────────────────────────────────────────────────
+    [SerializeField] private AudioClip _pickupChime;
+    [SerializeField] private AudioSource _sfxSource;
+
+    // ── Heartbeat ──────────────────────────────────────────────────────────
+    [SerializeField] private AudioSource _HeartbeatSource;
+
+    // ── Melody ─────────────────────────────────────────────────────────────
+    [SerializeField] private AudioSource _melodySource;
+
     // ── State Tracking ────────────────────────────────────────────────────
     private HeartbeatState _currentState;
 
@@ -21,12 +31,27 @@ public class AudioManager : MonoBehaviour
     private void Awake()
     {
         HeartbeatManager.OnStateChanged += HandleStateChanged;
+        Treasure.OnCollected += HandleTreasureCollected;
+        snapCalm.TransitionTo(0f);
+        if (_HeartbeatSource != null)
+            _HeartbeatSource.Play();
+#if UNITY_EDITOR
+        else
+            Debug.LogWarning("[AudioManager] _HeartbeatSource is null — heartbeat will not play");
+#endif
+        if (_melodySource != null)
+            _melodySource.Play();
+#if UNITY_EDITOR
+        else
+            Debug.LogWarning("[AudioManager] _melodySource is null — melody will not play");
+#endif
         _currentState = HeartbeatState.Calm;
     }
 
     private void OnDestroy()
     {
         HeartbeatManager.OnStateChanged -= HandleStateChanged;
+        Treasure.OnCollected -= HandleTreasureCollected;
     }
 
     // ── Snapshot Control ──────────────────────────────────────────────────
@@ -48,6 +73,13 @@ public class AudioManager : MonoBehaviour
 
         snapshot.TransitionTo(blendTime);
         _currentState = newState;
+    }
+
+    // ── SFX Handlers ──────────────────────────────────────────────────────
+    private void HandleTreasureCollected(TreasureType type)
+    {
+        if (type == TreasureType.Minor && _pickupChime != null && _sfxSource != null)
+            _sfxSource.PlayOneShot(_pickupChime);
     }
 
     // ── Public API ────────────────────────────────────────────────────────

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
@@ -16,6 +17,10 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private GameObject gameOverPanel;
     [SerializeField] private TMP_Text gameOverScoreText;
+
+    // ── Audio ──────────────────────────────────────────────────────────────
+    [SerializeField] private AudioClip _restartClip;
+    [SerializeField] private AudioSource _uiAudioSource;
 
     // ── State ──────────────────────────────────────────────────────────────
 
@@ -77,6 +82,16 @@ public class UIManager : MonoBehaviour
 
     public void Restart()
     {
+        StartCoroutine(RestartAfterSound());
+    }
+
+    private IEnumerator RestartAfterSound()
+    {
+        if (_uiAudioSource != null && _restartClip != null)
+        {
+            _uiAudioSource.PlayOneShot(_restartClip);
+            yield return new WaitForSeconds(_restartClip.length);
+        }
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
