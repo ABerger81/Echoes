@@ -84,6 +84,12 @@ Expansion — Milestone 9.
 **Scene:**
 - `SafeZone_01` — empty GameObject with Box Collider (Is Trigger, ~1.5 × 2 × 1.5), placed in a dead end off the main path
 
+**Visual children on SafeZone_01 (added after M9 trigger was verified):**
+- `MarkerDecal` — Quad (X rot 90°, scale 1.2×1.2, Y = 0.01) with `SafeZoneMarker` material (URP/Unlit, Transparent, Base Map = `Decal_SafeZone_Lyre`)
+- `MarkerLight` — Point Light, amber `#C8A45A`, Range 2.5, Intensity 0.8, Realtime, No Shadows. Requires enclosed geometry to be visible — placeholder until M17 adds walls.
+- `MarkerParticles` — Particle System, Rate 3/s, Disk shape R=0.5, slow upward drift, white fade to transparent over lifetime
+- AudioSource on SafeZone_01 root — `SFX_sacredAudio`, Loop, Play On Awake, Spatial Blend 1, Linear rolloff, Min 1m / Max 5m. 3D proximity fade handled automatically by Unity distance rolloff — no script needed.
+
 **Verified in M9:**
 - Trigger fires correctly on enter and exit
 - Movement noise suppressed while inside; state decays to Calm with no player input
