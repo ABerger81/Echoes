@@ -105,6 +105,31 @@ Build the system once. Configure content per mythology. Every future level is su
 
 ---
 
+# Implementation (M10)
+
+**Scripts:**
+- `Assets/_Game/Scripts/Environment/ClueObject.cs` — implements `IInteractable`. Non-destructive: sets `_examined = true` on first interact, plays optional examine sound, fires editor log. Second interact does nothing.
+
+**Key fields (set per-object in Inspector):**
+- `_clueIntent` — editor-only reference text describing what the clue teaches. Never displayed at runtime. Content finalised in M12 when monster behaviour is confirmed.
+- `_examinedPrompt` — prompt text shown after first examine. Default: `"Re-examine inscription"`.
+- `_examineSound` — optional AudioClip. Leave empty until M17.
+
+**Scene (Level_Minotaur):**
+- `Clue_01_TEST` — `[Placeholder] Monster returns to last heard position` / `Clue_Return` symbol
+- `Clue_02_TEST` — `[Placeholder] Monster cannot see — hearing only` / `Clue_Hearing` symbol
+- `Clue_03_TEST` — `[Placeholder] Safe zone threshold mythology reference` / `Clue_SafeZone` symbol
+- `Clue_04_TEST` — `[Placeholder] Wait longer than feels safe — it checks once more` / `Clue_Wait` symbol
+
+Each GO has: Box Collider (not trigger, ~0.4 × 0.6 × 0.1) + ClueObject + child `Symbol` (Quad, URP/Unlit Transparent, matching material).
+
+**Symbol textures:** game-icons.net (CC BY), white-on-black PNG, Alpha Source → From Gray Scale. Materials in `Assets/_Game/Art/Materials/`: `Clue_Hearing`, `Clue_Return`, `Clue_SafeZone`, `Clue_Wait`.
+
+**Not yet verified (requires M12):**
+- At least one clue meaningfully changes player behaviour during Escape Phase
+
+---
+
 # Open Questions
 
 - ~~How explicit is the connection between a learned clue and its in-game payoff?~~ — **Resolved:** Environmental only, no UI prompt. Player interprets and acts. The game never confirms they understood correctly.

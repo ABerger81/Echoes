@@ -275,13 +275,13 @@ Definition of Done:
 
 ---
 
-### Milestone 10 – Mythology Clue System
+### Milestone 10 – Mythology Clue System (Complete when M12 is Complete)
 
 Checklist:
 
-* [ ] Clue objects exist and are discoverable in the level environment
-* [ ] Clues are environmental only — no UI log, no hint system
-* [ ] Monster weakness knowledge must be observed, remembered, and applied by the player
+* [x] Clue objects exist and are discoverable in the level environment
+* [x] Clues are environmental only — no UI log, no hint system
+* [x] Monster weakness knowledge must be observed, remembered, and applied by the player
 * [ ] At least one clue meaningfully changes player behaviour during Escape Phase
 
 Definition of Done: see systems/clue_system.md

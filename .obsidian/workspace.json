@@ -11,10 +11,14 @@
             "id": "4febaacebdeaf830",
             "type": "leaf",
             "state": {
-              "type": "graph",
-              "state": {},
-              "icon": "lucide-git-fork",
-              "title": "Graph view"
+              "type": "markdown",
+              "state": {
+                "file": "README.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "README"
             }
           }
         ]
@@ -74,7 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 202.5
   },
   "right": {
     "id": "c5d0025050854e14",
@@ -90,6 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "README.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -99,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks"
+              "title": "Backlinks for README"
             }
           },
           {
@@ -108,11 +113,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "README.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links"
+              "title": "Outgoing links from README"
             }
           },
           {
@@ -150,12 +156,13 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "README.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline"
+              "title": "Outline of README"
             }
           }
         ]
@@ -177,5 +184,29 @@
     }
   },
   "active": "4febaacebdeaf830",
-  "lastOpenFiles": []
+  "lastOpenFiles": [
+    "devlog/v0.10.0.md",
+    "docs/scope.md",
+    "README.md.tmp.18480.50f87634619e",
+    "Temp/UnityTempFile-bb9b357a4b6652a48860b8c454e2c5dd",
+    "Temp/UnityTempFile-9c95526ef83ec43448823fc76268de64",
+    "Library/Search/propertyDatabase.db_a3acad9d49f1455582213d52092eac49_temp",
+    "Temp/ADB-Refresh8bd221d02c1ca024ebb2a658cd63abdf",
+    "Temp/UnityTempFile-159eff1241e32144c96abfd231236d6c",
+    "Temp/ADB-Refresh86e7785befc934845b9db4183de1ebb2",
+    "Library/Search/propertyDatabase.db_72f7d6fa929c4b3d8ae996acbce5f5ab_temp",
+    "Library/Search/propertyAliases.db_c3f20076e358424f85ea3e5e1879625c_temp",
+    "Library/Search/propertyAliases.db_34b155dafb134b39a04fec2647e38ccd_temp",
+    "Assets/_Game/Art/Textures/Decal_ClueWait.png",
+    "Assets/_Game/Art/Textures/Decal_ClueSafeZone.png",
+    "Assets/_Game/Art/Textures/Decal_ClueReturn.png",
+    "Assets/_Game/Art/Textures/Decal_ClueHearing.png",
+    "Assets/_Game/Art/Textures/sunbeams.png",
+    "Assets/_Game/Art/Textures/sands-of-time.png",
+    "Assets/_Game/Art/Textures/human-ear.png",
+    "Assets/_Game/Art/Textures/footprint.png",
+    "Assets/_Game/Art/Textures/UISprite_walk.png",
+    "Assets/_Game/Art/Textures/UISprite_run.png",
+    "architecture/event_flow.md"
+  ]
 }
